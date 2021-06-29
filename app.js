@@ -4,6 +4,9 @@ const port = 3000;
 const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user");
 
 // to connect mongoose
 mongoose
@@ -35,6 +38,15 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+// initialize passport to use in our application
+app.use(passport.initialize());
+// use middleware to use session
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // routers
 app.get("/", (req, res) => {
