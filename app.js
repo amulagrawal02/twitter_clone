@@ -7,6 +7,7 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
+const flash = require("connect-flash");
 
 // to connect mongoose
 mongoose
@@ -38,7 +39,7 @@ app.use(
     saveUninitialized: true,
   })
 );
-
+app.use(flash());
 // initialize passport to use in our application
 app.use(passport.initialize());
 // use middleware to use session

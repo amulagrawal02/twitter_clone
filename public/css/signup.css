@@ -1,0 +1,19 @@
+body {
+  background: #0099ff;
+  margin-top: 1.5rem;
+}
+.main {
+  background: white;
+  padding: 24px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  background-color: #f2f2f2;
+  border: 1px solid #dedede;
+}
+
+.main button {
+  background-color: #0099ff;
+}
