@@ -51,7 +51,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // routers
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("layouts/main-layout");
 });
 app.use(authRuter);
 

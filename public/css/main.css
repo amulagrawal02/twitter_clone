@@ -1,0 +1,26 @@
+:root {
+  --twitter-color: #0099ff;
+  --buttonHoverBg: #d4edff;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+nav a {
+  padding: 10px;
+  font-size: 30px;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  color: rgb(15, 20, 25);
+}
+
+nav a:hover {
+  background-color: var(--buttonHoverBg);
+  border-radius: 50%;
+}
