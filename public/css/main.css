@@ -1,6 +1,9 @@
 :root {
   --twitter-color: #0099ff;
+  --lightBlue: #0d7dc4;
   --buttonHoverBg: #d4edff;
+  --lightGrey: rgb(230, 236, 240);
+  --spacing: 15px;
 }
 
 nav {
@@ -23,4 +26,68 @@ nav a {
 nav a:hover {
   background-color: var(--buttonHoverBg);
   border-radius: 50%;
+}
+
+.main-layout {
+  border-left: 1px solid var(--lightGrey);
+  border-right: 1px solid var(--lightGrey);
+  display: flex;
+  flex-direction: column;
+}
+
+.titleContainer {
+  height: 53px;
+  padding: 0 var(--spacing);
+  border-bottom: 1px solid var(--lightGrey);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 19px;
+  font-weight: 800;
+  margin: 0;
+}
+.titleContainer h1 {
+  flex: 1;
+}
+
+.postContainer {
+  display: flex;
+  padding: var(--spacing);
+  border-bottom: 1px solid var(--lightGrey);
+  flex-shrink: 0;
+}
+userImageContainer {
+  width: 48px;
+  height: 48px;
+}
+.userImageContainer img {
+  width: 48px;
+  border-radius: 50%;
+  background-color: white;
+}
+.textareaContainer {
+  margin-left: 16px;
+  flex: 1;
+}
+.textareaContainer textarea {
+  width: 100%;
+  resize: none;
+  border: none;
+  font-size: 19px;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+#submitPostButton {
+  background-color: var(--twitter-color);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  padding: 7px 15px;
+  font-weight: 700;
+}
+#submitPostButton:hover {
+  background-color: var(--lightBlue);
 }
