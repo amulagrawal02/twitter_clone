@@ -4,7 +4,7 @@ const User = require("../models/user");
 const passport = require("passport");
 
 router.get("/register", (req, res) => {
-  res.render("./auth/signup", { message: req.flash("error") });
+  res.render("auth/signup", { message: req.flash("error") });
 });
 
 router.post("/register", async (req, res) => {

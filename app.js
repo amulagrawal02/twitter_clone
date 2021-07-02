@@ -8,6 +8,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const flash = require("connect-flash");
+const { isLoggedIn } = require("./middleware");
 
 // to connect mongoose
 mongoose
@@ -29,12 +30,14 @@ app.set("views", path.join(__dirname, "/views"));
 
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.urlencoded({ extended: "true" }));
+app.use(express.json());
 
-const authRuter = require("./routes/authRouter");
+const authRouter = require("./routes/authRouter");
+const postApiRouter = require("./routes/api/post");
 
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: "keyboardcat",
     resave: false,
     saveUninitialized: true,
   })
@@ -49,13 +52,15 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(authRouter);
+app.use(postApiRouter);
+
 // routers
-app.get("/", (req, res) => {
+app.get("/", isLoggedIn, (req, res) => {
   res.render("layouts/main-layout");
 });
-app.use(authRuter);
 
 // to Start server
-app.listen(port, () => {
+app.listen(port, (req, res) => {
   console.log(`Server start at ${port}`);
 });
