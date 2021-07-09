@@ -1,43 +1,48 @@
-console.log("Inside the js file");
 var timestamp;
 async function refreshTweet() {
   $("#allTweets").empty();
   const tweets = await axios.get("/api/post");
 
   for (let post of tweets.data) {
-    console.log(post);
     timestamp = timeDifference(new Date(), new Date(post.createdAt));
-    console.log("timestamp", timestamp);
     const Html = postHtml(post);
-    $("#allTweets").append(`<li>${Html}</li>`);
+    $("#allTweets").prepend(`<li>${Html}</li>`);
   }
 }
 refreshTweet();
 
 $("#submitPostButton").click(async () => {
   const postData = $("#post-text").val();
-  console.log(postData);
   const newPost = await axios.post("/api/post", { content: postData });
-  // console.log(newPost);
   refreshTweet();
   $("#post-text").val("");
 });
+$(document).on("click", ".likeButton", async (e) => {
+  const btn = $(e.target);
+  const postId = getPostId(btn);
+});
+
 function postHtml(postData) {
   return `
-    <div class = 'post'>
-      <div class = 'mainContentContainer'>
+    <div class = 'post' data-id='${postData._id}'>
         <div class = 'userImageContainer'>
           <img src='${postData.postedBy.profilePic}' alt = 'userImage'>
         </div>
-        <div class = "postContentContainer">
+
+
+      <div class = 'mainContentContainer'>
           <div class = 'header'>
-          <a href = '#' class = "displayName">${postData.postedBy.firstName} ${postData.postedBy.lastName}</a>
-          <span class = "username">@${postData.postedBy.username}</span>
-          <span class = "date">${timestamp}</span>
+            <a href = '#' class = "fw-bold displayName">${postData.postedBy.firstName} ${postData.postedBy.lastName}</a>
+            <span class = "username">@${postData.postedBy.username}</span>
+            <span class = "date">${timestamp}</span>
           </div>
+
+
           <div class = 'postBody'>
           <span>${postData.content}</span>
           </div>
+
+
           <div class='postFooter'>
             <div class='postButtonContainer'>
                 <button>
@@ -52,12 +57,19 @@ function postHtml(postData) {
             <div class='postButtonContainer red'>
                 <button class='likeButton'>
                     <i class='far fa-heart'></i>
-                   
                 </button>
             </div
-        <div>
+          <div>
+
       </div>
     </div>`;
+}
+
+async function getPostId(btn) {
+  const isRoot = btn.hasClass("post");
+  const rootBtn = isRoot === true ? btn : btn.closest(".post");
+  let value = rootBtn.data().id;
+  return value;
 }
 
 function timeDifference(current, previous) {
@@ -74,16 +86,16 @@ function timeDifference(current, previous) {
       return "Just now";
     }
 
-    return Math.round(elapsed / 1000) + " seconds ago";
+    return Math.round(elapsed / 1000) + "s";
   } else if (elapsed < msPerHour) {
-    return Math.round(elapsed / msPerMinute) + " minutes ago";
+    return Math.round(elapsed / msPerMinute) + "m";
   } else if (elapsed < msPerDay) {
-    return Math.round(elapsed / msPerHour) + " hours ago";
+    return Math.round(elapsed / msPerHour) + "h";
   } else if (elapsed < msPerMonth) {
-    return Math.round(elapsed / msPerDay) + " days ago";
+    return Math.round(elapsed / msPerDay) + "d";
   } else if (elapsed < msPerYear) {
-    return Math.round(elapsed / msPerMonth) + " months ago";
+    return Math.round(elapsed / msPerMonth) + "m";
   } else {
-    return Math.round(elapsed / msPerYear) + " years ago";
+    return Math.round(elapsed / msPerYear) + "y";
   }
 }

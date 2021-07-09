@@ -55,10 +55,11 @@ nav a:hover {
   padding: var(--spacing);
   border-bottom: 1px solid var(--lightGrey);
   flex-shrink: 0;
+  padding-left: 0px;
 }
-userImageContainer {
+.userImageContainer {
+  display: inline-block;
   width: 48px;
-  height: 48px;
 }
 .userImageContainer img {
   width: 48px;
@@ -90,4 +91,45 @@ textarea:focus {
 }
 #submitPostButton:hover {
   background-color: var(--lightBlue);
+}
+
+.post {
+  display: flex;
+  flex-direction: row;
+  /* margin: 0px 0px 16px; */
+  border-bottom: 1px solid var(--lightGrey);
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.post a {
+  text-decoration: none;
+  color: #0f1419;
+}
+.post a:hover {
+  text-decoration: underline;
+  color: #0f1419;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postFooter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainContentContainer {
+  padding-left: 16px;
+}
+
+#allTweets {
+  border-top: 1px solid var(--lightGrey);
+  padding: 0px;
 }
