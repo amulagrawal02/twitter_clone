@@ -17,9 +17,14 @@ $("#submitPostButton").click(async () => {
   refreshTweet();
   $("#post-text").val("");
 });
-$(document).on("click", ".likeButton", async (e) => {
-  const btn = $(e.target);
+
+$(".postsContainer").on("click", ".likeButton", async (e) => {
+  // console.log("clicked");
+  var btn = $(e.target);
+  btn = ButtonClick(btn);
   const postId = getPostId(btn);
+  const postData = await axios.patch(`/api/posts/${postId}/like`);
+  btn.find("span").text(postData.data.likedBy.length);
 });
 
 function postHtml(postData) {
@@ -57,6 +62,7 @@ function postHtml(postData) {
             <div class='postButtonContainer red'>
                 <button class='likeButton'>
                     <i class='far fa-heart'></i>
+                    <span>${postData.likedBy.length}</span>
                 </button>
             </div
           <div>
@@ -65,7 +71,13 @@ function postHtml(postData) {
     </div>`;
 }
 
-async function getPostId(btn) {
+function ButtonClick(btn) {
+  const isRoot = btn.has("button");
+  const rootBtn = isRoot === true ? btn : btn.closest("button");
+  return rootBtn;
+}
+
+function getPostId(btn) {
   const isRoot = btn.hasClass("post");
   const rootBtn = isRoot === true ? btn : btn.closest(".post");
   let value = rootBtn.data().id;

@@ -21,4 +21,24 @@ router.post("/api/post", isLoggedIn, async (req, res) => {
   res.json(newPost);
 });
 
+router.patch("/api/posts/:id/like", isLoggedIn, async (req, res) => {
+  const postId = req.params.id;
+  const userId = req.user._id;
+  const isLiked = req.user.likedPost && req.user.likedPost.includes(postId);
+  const option = isLiked ? `$pull` : `$addToSet`;
+
+  req.user = await User.findByIdAndUpdate(
+    userId,
+    { [option]: { likedPost: postId } },
+    { new: true }
+  );
+  const post = await Post.findByIdAndUpdate(
+    postId,
+    { [option]: { likedBy: userId } },
+    { new: true }
+  );
+
+  res.status(200).json(post);
+});
+
 module.exports = router;

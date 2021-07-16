@@ -4,6 +4,7 @@
   --buttonHoverBg: #d4edff;
   --lightGrey: rgb(230, 236, 240);
   --spacing: 15px;
+  --like: rgb(224, 36, 94);
 }
 
 nav {
@@ -132,4 +133,9 @@ ul {
 #allTweets {
   border-top: 1px solid var(--lightGrey);
   padding: 0px;
+}
+
+button {
+  border: none;
+  background-color: white;
 }
