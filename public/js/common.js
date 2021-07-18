@@ -46,17 +46,16 @@ function postHtml(postData) {
           <div class = 'postBody'>
           <span>${postData.content}</span>
           </div>
-
-
           <div class='postFooter'>
             <div class='postButtonContainer'>
-                <button>
+                 <button type="button" data-bs-toggle="modal" data-bs-target="#replyModal">
                     <i class='far fa-comment'></i>
-                </button>
+                  </button>
             </div>
             <div class='postButtonContainer green'>
                 <button class='retweet'>
                     <i class='fas fa-retweet'></i>
+                    
                 </button>
             </div>
             <div class='postButtonContainer red'>
