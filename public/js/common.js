@@ -70,6 +70,16 @@ function postHtml(postData) {
     </div>`;
 }
 
+$(".postsContainer").on("click", ".postButtonContainer", async (e) => {
+  var btn = $(e.target);
+  btn = ButtonClick(btn);
+  const postId = getPostId(btn);
+  const postData = await axios.get(`/api/post/${postId}`);
+  const html = postHtml(postData.data);
+  $("#originalPostContainer").empty();
+  $("#originalPostContainer").append(html);
+});
+
 function ButtonClick(btn) {
   const isRoot = btn.has("button");
   const rootBtn = isRoot === true ? btn : btn.closest("button");

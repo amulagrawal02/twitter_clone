@@ -34,6 +34,7 @@ nav a:hover {
   border-right: 1px solid var(--lightGrey);
   display: flex;
   flex-direction: column;
+  max-width: 598px;
 }
 
 .titleContainer {
@@ -118,12 +119,13 @@ ul {
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
-.postFooter {
+.post .postFooter {
   display: flex;
   justify-content: space-between;
+  max-width: 425px;
 }
 
 .mainContentContainer {

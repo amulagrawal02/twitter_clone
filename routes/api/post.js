@@ -41,4 +41,10 @@ router.patch("/api/posts/:id/like", isLoggedIn, async (req, res) => {
   res.status(200).json(post);
 });
 
+router.get("/api/post/:id", isLoggedIn, async (req, res) => {
+  const post = await Post.findById(req.params.id).populate("postedBy");
+
+  res.status(200).json(post);
+});
+
 module.exports = router;
