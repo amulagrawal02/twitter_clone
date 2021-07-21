@@ -141,3 +141,11 @@ button {
   border: none;
   background-color: white;
 }
+
+.replyArea a {
+  color: rgb(27, 149, 224);
+}
+
+.replyArea a:hover {
+  color: rgb(27, 149, 224);
+}

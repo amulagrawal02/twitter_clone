@@ -13,10 +13,16 @@ router.post("/api/post", isLoggedIn, async (req, res) => {
   console.log("inside the api");
   // console.log(req.user._id);
 
-  const post = {
+  let post = {
     content: req.body.content,
     postedBy: req.user._id,
   };
+  if (req.body.replyTo) {
+    post = {
+      ...post,
+      replyTo: req.body.replyTo,
+    };
+  }
   const newPost = await Post.create(post);
   res.json(newPost);
 });
@@ -45,6 +51,11 @@ router.get("/api/post/:id", isLoggedIn, async (req, res) => {
   const post = await Post.findById(req.params.id).populate("postedBy");
 
   res.status(200).json(post);
+});
+
+router.get("/api/post/reply/:id", isLoggedIn, async (req, res) => {
+  const replyData = await Post.findById(req.params.id).populate("postedBy");
+  return res.json(replyData);
 });
 
 module.exports = router;

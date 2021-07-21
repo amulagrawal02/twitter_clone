@@ -1,16 +1,18 @@
 var timestamp;
+
+// for fetching old posts
 async function refreshTweet() {
   $("#allTweets").empty();
   const tweets = await axios.get("/api/post");
-
   for (let post of tweets.data) {
     timestamp = timeDifference(new Date(), new Date(post.createdAt));
-    const Html = postHtml(post);
+    const Html = await postHtml(post);
     $("#allTweets").prepend(`<li>${Html}</li>`);
   }
 }
 refreshTweet();
 
+// for new post
 $("#submitPostButton").click(async () => {
   const postData = $("#post-text").val();
   const newPost = await axios.post("/api/post", { content: postData });
@@ -18,6 +20,7 @@ $("#submitPostButton").click(async () => {
   $("#post-text").val("");
 });
 
+// For like functionality
 $(".postsContainer").on("click", ".likeButton", async (e) => {
   // console.log("clicked");
   var btn = $(e.target);
@@ -27,7 +30,16 @@ $(".postsContainer").on("click", ".likeButton", async (e) => {
   btn.find("span").text(postData.data.likedBy.length);
 });
 
-function postHtml(postData) {
+// create post Html
+async function postHtml(postData) {
+  let replyEmail = "";
+  let replyData = "";
+  if (postData.replyTo && postData.replyTo.length > 0) {
+    replyEmail = await getReplyName(postData.replyTo);
+    replyEmail = `@${replyEmail}`;
+    replyData = "Replying to ";
+  }
+
   return `
     <div class = 'post' data-id='${postData._id}'>
         <div class = 'userImageContainer'>
@@ -42,6 +54,10 @@ function postHtml(postData) {
             <span class = "date">${timestamp}</span>
           </div>
 
+          <div class = "replyArea">
+          <span>${replyData}</span>
+          <span><a href = "#">${replyEmail}</a></span>
+          </div>
 
           <div class = 'postBody'>
           <span>${postData.content}</span>
@@ -70,27 +86,54 @@ function postHtml(postData) {
     </div>`;
 }
 
+// open modal when user click on reply button
 $(".postsContainer").on("click", ".postButtonContainer", async (e) => {
   var btn = $(e.target);
   btn = ButtonClick(btn);
   const postId = getPostId(btn);
   const postData = await axios.get(`/api/post/${postId}`);
-  const html = postHtml(postData.data);
+  const html = await postHtml(postData.data);
+  $(".modal-body").attr("data-id", `${postId}`);
   $("#originalPostContainer").empty();
   $("#originalPostContainer").append(html);
 });
 
+// Submit reply post;
+$("#submitReplyButton").click(async (e) => {
+  const postText = $("#reply-text-container").val();
+  const replyTo = $(".modal-body").attr("data-id");
+  if (postText && postText.length > 0) {
+    const postData = await axios.post("/api/post", {
+      content: postText,
+      replyTo: replyTo,
+    });
+    console.log(postData);
+    const html = postHtml(postData.data);
+  }
+
+  refreshTweet();
+});
+
+// for like ButtonHandler
 function ButtonClick(btn) {
   const isRoot = btn.has("button");
   const rootBtn = isRoot === true ? btn : btn.closest("button");
   return rootBtn;
 }
 
+// for get postId of any post
 function getPostId(btn) {
   const isRoot = btn.hasClass("post");
   const rootBtn = isRoot === true ? btn : btn.closest(".post");
   let value = rootBtn.data().id;
   return value;
+}
+
+// get the name of the person who reply on a particular post
+async function getReplyName(replyTo) {
+  const replyData = await axios.get(`/api/post/reply/${replyTo}`);
+  const replyName = replyData.data.postedBy.username;
+  return replyName;
 }
 
 function timeDifference(current, previous) {
