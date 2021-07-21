@@ -149,3 +149,7 @@ button {
 .replyArea a:hover {
   color: rgb(27, 149, 224);
 }
+
+.fa-twitter {
+  color: #0099ff;
+}

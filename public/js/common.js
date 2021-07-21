@@ -34,9 +34,11 @@ $(".postsContainer").on("click", ".likeButton", async (e) => {
 async function postHtml(postData) {
   let replyEmail = "";
   let replyData = "";
+  let starter = "";
   if (postData.replyTo && postData.replyTo.length > 0) {
     replyEmail = await getReplyName(postData.replyTo);
-    replyEmail = `@${replyEmail}`;
+    replyEmail = `${replyEmail}`;
+    starter = "@";
     replyData = "Replying to ";
   }
 
@@ -49,14 +51,14 @@ async function postHtml(postData) {
 
       <div class = 'mainContentContainer'>
           <div class = 'header'>
-            <a href = '#' class = "fw-bold displayName">${postData.postedBy.firstName} ${postData.postedBy.lastName}</a>
+            <a href = '/profile/${postData.postedBy.username}' class = "fw-bold displayName">${postData.postedBy.firstName} ${postData.postedBy.lastName}</a>
             <span class = "username">@${postData.postedBy.username}</span>
             <span class = "date">${timestamp}</span>
           </div>
 
           <div class = "replyArea">
           <span>${replyData}</span>
-          <span><a href = "#">${replyEmail}</a></span>
+          <span><a href = "/profile/${replyEmail}">${starter}${replyEmail}</a></span>
           </div>
 
           <div class = 'postBody'>
