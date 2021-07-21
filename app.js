@@ -34,6 +34,7 @@ app.use(express.json());
 
 const authRouter = require("./routes/authRouter");
 const postApiRouter = require("./routes/api/post");
+const profileRouter = require("./routes/profileRouter");
 
 app.use(
   session({
@@ -54,6 +55,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(authRouter);
 app.use(postApiRouter);
+app.use(profileRouter);
 
 // routers
 app.get("/", isLoggedIn, (req, res) => {

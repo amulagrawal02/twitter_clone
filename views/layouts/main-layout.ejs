@@ -8,56 +8,29 @@
             <a href="#"><i class="fas fa-search"></i></a>
             <a href="#"><i class="fas fa-bell"></i></i></a>
             <a href="#"><i class="fas fa-envelope"></i></a>
-            <a href="#"><i class="fas fa-user"></i></a>
-            <a href="#"><i class="fas fa-sign-out-alt"></i></a>
+            <a href="/profile"><i class="fas fa-user"></i></a>
+            <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
         </nav>
         <div class="main-layout col-10 col-md-8 col-lg-6">
             <h1 class="fw-bold titleContainer">Home</h1>
 
-            <div class="modal fade" id="replyModal" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="replyModalLabel">Reply</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div id="originalPostContainer"></div>
-                            <div class="mb-3 postContainer">
-                                <div class="userImageContainer">
-                                    <img src="/images/profilePic.jpeg" alt="User Profile" />
-                                </div>
+            <%- include('../partials/modal.ejs')%>
 
-                                <div class="textareaContainer">
-                                    <textarea id="reply-text-container" name="" id="" cols="30" rows="3"
-                                        placeholder="What's happening?"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" data-bs-dismiss="modal">
-                                Close
-                            </button>
-                            <button id="submitReplyButton" class="btn btn-primary">Reply</button>
-                        </div>
+
+                <div class="mb-3 postContainer">
+                    <div class="userImageContainer">
+                        <img src="/images/profilePic.jpeg" alt="user-profile-pic">
+                    </div>
+                    <div class="textareaContainer">
+                        <textarea id="post-text" cols="30" rows="3" placeholder="What's happening ? "></textarea>
+                        <button id="submitPostButton">Tweet</button>
                     </div>
                 </div>
-            </div>
 
-            <div class="mb-3 postContainer">
-                <div class="userImageContainer">
-                    <img src="/images/profilePic.jpeg" alt="user-profile-pic">
+                <div class="mb-3 postsContainer">
+                    <ul id="allTweets">
+                    </ul>
                 </div>
-                <div class="textareaContainer">
-                    <textarea id="post-text" cols="30" rows="3" placeholder="What's happening ? "></textarea>
-                    <button id="submitPostButton">Tweet</button>
-                </div>
-            </div>
-
-            <div class="mb-3 postsContainer">
-                <ul id="allTweets">
-                </ul>
-            </div>
 
         </div>
         <div class="sidebar d-none d-md-block col-md-2 col-lg-4">
