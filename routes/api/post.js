@@ -58,4 +58,13 @@ router.get("/api/post/reply/:id", isLoggedIn, async (req, res) => {
   return res.json(replyData);
 });
 
+//prevPost = replyTo Id, currentPost = currently replyPost
+router.post("/api/post/:prevPost/:currentPost", async (req, res) => {
+  const data = await Post.findByIdAndUpdate(req.params.prevPost, {
+    $addToSet: { ctnReply: req.params.currentPost },
+  });
+
+  res.status(200).json(data);
+});
+
 module.exports = router;

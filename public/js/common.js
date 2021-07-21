@@ -68,6 +68,7 @@ async function postHtml(postData) {
             <div class='postButtonContainer'>
                  <button type="button" data-bs-toggle="modal" data-bs-target="#replyModal">
                     <i class='far fa-comment'></i>
+                    <span>${postData.ctnReply.length}</span>
                   </button>
             </div>
             <div class='postButtonContainer green'>
@@ -109,7 +110,8 @@ $("#submitReplyButton").click(async (e) => {
       content: postText,
       replyTo: replyTo,
     });
-    console.log(postData);
+    console.log(postData.data);
+    const data = await axios.post(`/api/post/${replyTo}/${postData.data._id}`);
     const html = postHtml(postData.data);
   }
 
