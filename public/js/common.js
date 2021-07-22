@@ -66,7 +66,7 @@ async function postHtml(postData) {
           </div>
           <div class='postFooter'>
             <div class='postButtonContainer'>
-                 <button type="button" data-bs-toggle="modal" data-bs-target="#replyModal">
+                 <button type="button" class = 'reply' data-bs-toggle="modal" data-bs-target="#replyModal">
                     <i class='far fa-comment'></i>
                     <span>${postData.ctnReply.length}</span>
                   </button>
