@@ -126,10 +126,11 @@ li {
 
 .postFooter {
   display: flex;
+  max-width: 400px;
 }
 
 .postFooter button {
-  margin-right: 100px;
+  margin-right: 10vw;
 }
 
 .mainContentContainer {
@@ -196,8 +197,7 @@ li {
 
 .coverPic {
   background-color: var(--lightGrey);
-  height: 15vw;
-  width: 100%;
+  height: 180px;
   min-height: 148.4px;
   max-height: 199.33px;
   position: relative;
@@ -208,7 +208,7 @@ li {
   height: 132px;
   border-radius: 50%;
   position: absolute;
-  top: 180px;
+  top: 150px;
   margin-left: 20px;
   border: 5px solid white;
 }

@@ -71,13 +71,13 @@ async function postHtml(postData) {
                     <span class= "mt-small">${postData.ctnReply.length}</span>
                   </button>
             </div>
-            <div class='postButtonContainer green'>
+            <div class='postButtonContainer'>
                 <button class='retweet'>
                     <i class='fas fa-retweet'></i>
                     
                 </button>
             </div>
-            <div class='postButtonContainer red'>
+            <div class='postButtonContainer '>
                 <button class='likeButton'>
                     <i class='far fa-heart'></i>
                     <span class= "mt-small">${postData.likedBy.length}</span>
