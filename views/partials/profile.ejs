@@ -3,21 +3,60 @@
 
     <div class="row">
         <%- include('./navbar.ejs')%>
-            <div class="main-layout col-10 col-md-8 col-lg-6">
-                <h1 class="fw-bold titleContainer">
-                    <%=payLoad.displayName%>
-                </h1>
+            <%- include('../partials/modal.ejs')%>
+                <div class="main-layout col-10 col-md-8 col-lg-6">
+                    <h1 class="fw-bold titleContainer">
+                        <%=payLoad.displayName%>
+                    </h1>
 
-                <div class="mb-3 postsContainer">
+                    <div class="mb-3 postsContainer">
+                        <div class="profileHeader">
+                            <div class="coverPic"></div>
+                            <div class="profile">
+                                <img src="/images/profilePic.jpeg">
+                            </div>
+                        </div>
+                        <script>
+                            var profileId = `<%=payLoad.user._id%>`;
+                        </script>
+
+                    </div>
+                    <div class="profileTextCont">
+                        <div class="profileInfo">
+                            <span class="fw-bold fs-big">
+                                <%=payLoad.displayName%>
+                            </span>
+                            <span class="blk">
+                                @<%=payLoad.user.username%>
+                            </span>
+                            <span class="blk"><i class="far fa-calendar-alt" style="margin-right: 5px ;"></i>
+                                Joined <%=payLoad.user.createdAt.getUTCFullYear()%>
+                            </span>
+                            <a href="/">Following</a>
+                            <a href="/">Followers</a>
+                        </div>
+                        <div class="postHeader fw-bold">
+                            <div class="tab active" style=" width: 50%; text-align: center;">
+                                <a href="/profile/<%=payLoad.user.username%>">Posts</a>
+                            </div>
+                            <div class="tab" style="width: 50%; text-align: center;">
+                                <a href="/">Replies</a>
+                            </div>
+
+                        </div>
+                        <div class="userPostCnt postsContainer">
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="sidebar d-none d-md-block col-md-2 col-lg-4">
+                    sidebar
 
                 </div>
 
-            </div>
-            <div class="sidebar d-none d-md-block col-md-2 col-lg-4">
-                sidebar
-            </div>
-
     </div>
 
-
+    <script src="/js/profile.js"></script>
     <%- include('../partials/header.ejs')%>

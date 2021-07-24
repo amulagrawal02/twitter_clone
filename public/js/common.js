@@ -68,7 +68,7 @@ async function postHtml(postData) {
             <div class='postButtonContainer'>
                  <button type="button" class = 'reply' data-bs-toggle="modal" data-bs-target="#replyModal">
                     <i class='far fa-comment'></i>
-                    <span>${postData.ctnReply.length}</span>
+                    <span class= "mt-small">${postData.ctnReply.length}</span>
                   </button>
             </div>
             <div class='postButtonContainer green'>
@@ -80,7 +80,7 @@ async function postHtml(postData) {
             <div class='postButtonContainer red'>
                 <button class='likeButton'>
                     <i class='far fa-heart'></i>
-                    <span>${postData.likedBy.length}</span>
+                    <span class= "mt-small">${postData.likedBy.length}</span>
                 </button>
             </div
           <div>
@@ -90,7 +90,8 @@ async function postHtml(postData) {
 }
 
 // open modal when user click on reply button
-$(".postsContainer").on("click", ".postButtonContainer", async (e) => {
+$(".postsContainer").on("click", ".reply", async (e) => {
+  console.log("clicked");
   var btn = $(e.target);
   btn = ButtonClick(btn);
   const postId = getPostId(btn);
@@ -113,8 +114,10 @@ $("#submitReplyButton").click(async (e) => {
     console.log(postData.data);
     const data = await axios.post(`/api/post/${replyTo}/${postData.data._id}`);
     const html = postHtml(postData.data);
+    $("#reply-text-container").val("");
   }
 
+  loadPost();
   refreshTweet();
 });
 

@@ -5,14 +5,13 @@ const { isLoggedIn } = require("../../middleware");
 const User = require("../../models/user");
 
 router.get("/api/post", isLoggedIn, async (req, res) => {
-  const posts = await Post.find({}).populate("postedBy");
+  console.log(req.query);
+  const filter = req.query;
+  const posts = await Post.find(filter).populate("postedBy");
   res.json(posts);
 });
 
 router.post("/api/post", isLoggedIn, async (req, res) => {
-  console.log("inside the api");
-  // console.log(req.user._id);
-
   let post = {
     content: req.body.content,
     postedBy: req.user._id,
