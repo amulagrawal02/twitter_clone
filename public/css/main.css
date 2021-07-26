@@ -242,3 +242,33 @@ li {
   background-color: rgba(29, 161, 242, 0.1);
   color: rgba(29, 161, 242, 1);
 }
+
+.main-photo img {
+  width: 68px;
+  height: 68px;
+  border-radius: 5px;
+}
+
+.trending {
+  background-color: rgba(0, 0, 0, 0.03);
+  font-size: 15px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+.headline {
+  display: flex;
+  flex-direction: row;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--lightGrey);
+}
+
+.main-text {
+  min-width: 167.44px;
+}
+.headline span {
+  display: block;
+}
+
+.headline:hover {
+  background-color: rgb(239, 243, 247);
+}
