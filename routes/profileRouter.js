@@ -8,6 +8,7 @@ router.get("/profile", isLoggedIn, (req, res) => {
     user: req.user,
     displayName: req.user.firstName + " " + req.user.lastName,
   };
+  console.log(payLoad);
 
   res.render("./partials/profile.ejs", { payLoad });
 });
@@ -20,6 +21,11 @@ router.get("/profile/:userName", isLoggedIn, async (req, res) => {
   };
 
   res.render("./partials/profile.ejs", { payLoad });
+});
+
+router.get("/profile/Liked/:profileId", isLoggedIn, async (req, res) => {
+  const data = await User.findById(req.params.profileId);
+  res.status(200).json(data);
 });
 
 module.exports = router;
