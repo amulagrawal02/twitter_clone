@@ -14,16 +14,24 @@ async function loadPost() {
   }
 }
 
+$("#tab-1").click(async (e) => {
+  $(".userPostCnt").empty();
+  $("#Liked").removeClass("active");
+  $("#tab-1").addClass("active");
+  loadPost();
+});
+
 $("#Liked").click(async (e) => {
   console.log("Clicked");
-  console.log($(e.target).attr());
+  $("#tab-1").removeClass("active");
+  $("#Liked").addClass("active");
   $(".userPostCnt").empty();
   const profileData = await axios.get(`/profile/Liked/${profileId}`);
   const likedPost = profileData.data.likedPost;
 
   for (let post of likedPost) {
-    console.log(post);
     const postData = await axios.get(`/api/post/${post}`);
+    console.log(postData);
     timestamp = timeDifference(new Date(), new Date(postData.data.createdAt));
     const Html = await postHtml(postData.data);
     $(".userPostCnt").prepend(`<li>${Html}</li>`);

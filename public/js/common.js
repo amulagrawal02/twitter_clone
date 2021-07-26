@@ -95,6 +95,7 @@ $(".postsContainer").on("click", ".reply", async (e) => {
   var btn = $(e.target);
   btn = ButtonClick(btn);
   const postId = getPostId(btn);
+  console.log(postId);
   const postData = await axios.get(`/api/post/${postId}`);
   const html = await postHtml(postData.data);
   $(".modal-body").attr("data-id", `${postId}`);
@@ -117,8 +118,10 @@ $("#submitReplyButton").click(async (e) => {
     $("#reply-text-container").val("");
   }
 
-  loadPost();
+  console.log("start");
+  // await loadPost();
   refreshTweet();
+  console.log("end");
 });
 
 // for like ButtonHandler

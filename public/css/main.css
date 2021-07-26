@@ -126,7 +126,7 @@ li {
 
 .postFooter {
   display: flex;
-  max-width: 400px;
+  max-width: 300px;
 }
 
 .postFooter button {
@@ -235,7 +235,7 @@ li {
   font-size: 15px;
 }
 .active {
-  border-bottom: 5px solid rgba(29, 161, 242, 1);
+  border-bottom: 3px solid rgba(29, 161, 242, 1);
 }
 
 .tab:hover {
