@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+require("dotenv").config();
 const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
@@ -12,7 +13,7 @@ const { isLoggedIn } = require("./middleware");
 
 // to connect mongoose
 mongoose
-  .connect("mongodb://localhost:27017/twitter-clone", {
+  .connect(process.env.uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -63,6 +64,6 @@ app.get("/", isLoggedIn, (req, res) => {
 });
 
 // to Start server
-app.listen(port, (req, res) => {
+app.listen(process.env.PORT || 3000, (req, res) => {
   console.log(`Server start at ${port}`);
 });

@@ -1,5 +1,3 @@
-console.log("it working");
-const api_key = "6fc0a46baebe4e13aa956724484292b0";
 let data;
 async function loadNews() {
   if ($(".trending").width() < 325) {
