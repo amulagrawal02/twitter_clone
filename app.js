@@ -13,7 +13,7 @@ const { isLoggedIn } = require("./middleware");
 
 // to connect mongoose
 mongoose
-  .connect(process.env.uri, {
+  .connect(process.env.URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
